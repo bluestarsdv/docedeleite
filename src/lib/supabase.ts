@@ -1,11 +1,12 @@
 import { createClient } from '@supabase/supabase-js'
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
-const supabaseKey =
-  process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY ||
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+export function getSupabase() {
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL
+  const key = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY
 
-export const supabase =
-  supabaseUrl && supabaseKey
-    ? createClient(supabaseUrl, supabaseKey)
-    : null
+  if (!url || !key) {
+    throw new Error('Supabase não configurado')
+  }
+
+  return createClient(url, key)
+}
