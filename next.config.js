@@ -1,7 +1,5 @@
-const nextConfig = {
+module.exports = {
   typescript: {
     ignoreBuildErrors: true,
   },
 }
-
-module.exports = nextConfig
